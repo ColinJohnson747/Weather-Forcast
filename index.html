@@ -27,30 +27,48 @@
     </head>
 
     <body>
-        <!--Navbar-->>
+        <!--Navbar-->
         <nav class="navbar navbar-dark bg-dark">
             <span class="navbar-brand mb-0 h1">Weather Dashboard</span>
         </nav>
 
-        <div class="row">
+        <div class="row city-search">
             <!--Search Form-->
             <div class="col-3">
-                <div class="input-group mb-3 city-search">
-                    <input type="text" class="form-control" placeholder="City" aria-label="Recipient's username"
-                        aria-describedby="button-addon2">
-                    <div class="input-group-append">
-                        <button class="btn btn-outline-secondary" type="button" id="search">Search</button>
+                <div class="row">
+                    <div class="input-group mb-3 city-search">
+                        <input type="text" class="form-control" placeholder="City" aria-label="Recipient's username"
+                            aria-describedby="button-addon2" id="citiesInput">
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-secondary" type="button" id="search">Search</button>
+                        </div>
                     </div>
                 </div>
+
                 <!--City List-->
+                <ul class="list-group citiesList"></ul>
 
             </div>
 
 
             <div class="col-9">
                 <!--Daily Weather Forcast-->
-                <div class="row">
-
+                <div class="row border rounded">
+                    <!--City and Date-->
+                    <h1></h1>
+                    </br>
+                    <!--Temparature-->
+                    <p></p>
+                    </br>
+                    <!--Humidity-->
+                    <p></p>
+                    </br>
+                    <!--Wind Speed-->
+                    <p></p>
+                    </br>
+                    <!--UV Index-->
+                    <p></p>
+                    </br>
                 </div>
                 <!--Five Day Futurecast-->
                 <div class="row">
