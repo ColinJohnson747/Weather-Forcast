@@ -90,6 +90,22 @@ $(document).ready(function() {
         }).then(function(response3){
         console.log("ajaxCallDTHMUV -> response3", response3)
           
+        $(".Futurecast").append("<div class='card box row' style='width: 18rem;'></div>")
+          for  (i = 6; i< response3.list.length; i += 8) {
+            var date = response3.list[i].dt_txt
+            var weatherIcon = response3.list[i].weather[0].icon;
+            var currentTemp = response3.list[i].main.temp;
+            var currentHumidity = response3.list[i].main.humidity;
+            console.log("ajaxCallDTHMUV -> weatherIcon", weatherIcon)
+
+
+
+            
+            $(".box").append(`<img src="weather/${weatherIcon}.png" class="card-img-top">`)
+            $(".box").append(`<p class="date ">${date}</p>`)            
+            $(".box").append(`<p class="temperature"> Temp: ${currentTemp} °F</p>`)
+            $(".box").append(`<p class="humidity">Humidity: ${currentHumidity}%</p>`)
+          }
         })
 
 
