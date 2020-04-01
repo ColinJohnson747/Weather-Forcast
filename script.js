@@ -6,20 +6,21 @@ $(document).ready(function() {
 
   //Current Date
   var currentDate = moment().format("MMM Do YYYY");
-  console.log("currentDate", currentDate);
 
   //for saving cities entered to local storage, and appending them to a list
+
   
-  var searchedCities = [];
   $("#search").click(function() {
     var citiesInput = document.getElementById("citiesInput").value;
-    console.log("citiesInput", citiesInput)
-    
+
     $(".citiesList").prepend(
-      `<button class="list-group-item clickMe"> ${citiesInput} </button>`
+      `<button class="list-group-item clickMe"  > ${citiesInput} </button>`
     );
+    var searchedCities = [];
+
+    searchedCities = JSON.parse(localStorage.getItem('searchedCities')) || [];
     
-    searchedCities.push(citiesInput)
+    searchedCities.push(citiesInput);
     localStorage.setItem("searchedCities", JSON.stringify(searchedCities));
   });
 
@@ -31,18 +32,20 @@ $(document).ready(function() {
     for (var i = 0; i < arrayLength; i++) {
       var cityNameFromArray = arrayFromStorage[i];
       $(".citiesList").prepend(
-        `<button class="list-group-item clickMe" id="click"> ${cityNameFromArray} </button>`
+        `<button class="list-group-item clickMe"  id="click"> ${cityNameFromArray} </button>`
       );
     }
   }
   
+  
+  
+  //function for running city search function on click of list
 
   //Ajax Call
   var inputCity = document.getElementById("citiesInput").value;
   var cityArrayLength = arrayFromStorage.length;
   var finalArrayPosition = cityArrayLength - 1;
   var lastCitySearched = arrayFromStorage[finalArrayPosition];
-  console.log("lastCitySearched", lastCitySearched)
 
   function ajaxCallDTHMUV() {
     //All BUT UV
@@ -91,7 +94,6 @@ $(document).ready(function() {
           url: queryURL5Day,
           method: "GET"
         }).then(function(response3) {
-          console.log("ajaxCallDTHMUV -> response3", response3);
 
           $(".Futurecast").empty();
           for (i = 6; i < response3.list.length; i += 8) {
@@ -99,7 +101,6 @@ $(document).ready(function() {
             var weatherIcon = response3.list[i].weather[0].icon;
             var currentTemp = response3.list[i].main.temp;
             var currentHumidity = response3.list[i].main.humidity;
-            console.log("ajaxCallDTHMUV -> weatherIcon", weatherIcon);
 
             $(".Futurecast").append(
               `<div class='card box row ${i}' style='width: 18rem;'></div>`
@@ -123,7 +124,7 @@ $(document).ready(function() {
 
   function ajaxCallDTHMUVSearch() {
     //All BUT UV
-    
+
     var queryURL =
       "https://api.openweathermap.org/data/2.5/weather?q=" +
       inputCity +
@@ -169,7 +170,6 @@ $(document).ready(function() {
           url: queryURL5Day,
           method: "GET"
         }).then(function(response3) {
-          console.log("ajaxCallDTHMUV -> response3", response3);
 
           $(".Futurecast").empty();
           for (i = 6; i < response3.list.length; i += 8) {
@@ -177,7 +177,6 @@ $(document).ready(function() {
             var weatherIcon = response3.list[i].weather[0].icon;
             var currentTemp = response3.list[i].main.temp;
             var currentHumidity = response3.list[i].main.humidity;
-            console.log("ajaxCallDTHMUV -> weatherIcon", weatherIcon);
 
             $(".Futurecast").append(
               `<div class='card box row ${i}' style='width: 18rem;'></div>`
@@ -200,12 +199,11 @@ $(document).ready(function() {
   }
   function ajaxCallOnClick() {
     //All BUT UV
-    var clickedCity = $(this).textContent;
-    console.log("ajaxCallDTHMUVSearch -> clickedCity", clickedCity)
-    
+    var clickedCity = $(this).text;
+
     var queryURL =
       "https://api.openweathermap.org/data/2.5/weather?q=" +
-      clickedCity+
+      clickedCity +
       "&units=imperial&APPID=ef223b58d8d5d37b8dcdbb55e928d804";
 
     $.ajax({
@@ -248,7 +246,6 @@ $(document).ready(function() {
           url: queryURL5Day,
           method: "GET"
         }).then(function(response3) {
-          console.log("ajaxCallDTHMUV -> response3", response3);
 
           $(".Futurecast").empty();
           for (i = 6; i < response3.list.length; i += 8) {
@@ -256,7 +253,6 @@ $(document).ready(function() {
             var weatherIcon = response3.list[i].weather[0].icon;
             var currentTemp = response3.list[i].main.temp;
             var currentHumidity = response3.list[i].main.humidity;
-            console.log("ajaxCallDTHMUV -> weatherIcon", weatherIcon);
 
             $(".Futurecast").append(
               `<div class='card box row ${i}' style='width: 18rem;'></div>`
@@ -277,9 +273,9 @@ $(document).ready(function() {
       });
     });
   }
-  $("#search").on("click", ajaxCallDTHMUVSearch());
-  $(".clickMe").on("click",ajaxCallOnClick());
-  window.onload = ajaxCallDTHMUV();
-  window.onload = pullCities();
+  $("#search").on("click", ajaxCallDTHMUV());
+  $("#click").on("click", ajaxCallOnClick());
+  ajaxCallDTHMUV();
+  pullCities();
   //function for running city search function on click of list
 });
