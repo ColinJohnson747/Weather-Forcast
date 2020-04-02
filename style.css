@@ -7,6 +7,20 @@
     margin: 10px 10px 10px 10px
 }
 
-.Futurecast{
-
+.low{
+background-color: green;
 }
+.moderate{
+    background-color: yellow;
+    color: black;
+}
+.high{
+background-color: orange;
+}
+.veryHigh{
+background-color: red;
+}
+.extreme{
+background-color: rgb(92, 75, 189);
+}
+

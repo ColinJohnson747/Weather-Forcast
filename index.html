@@ -36,13 +36,12 @@
             <!--Search Form-->
             <div class="col-3">
                 <div class="row">
-                    <div class="input-group mb-3 city-search">
-                        <input type="text" class="form-control" placeholder="City" aria-label="Recipient's username"
-                            aria-describedby="button-addon2" id="citiesInput">
-                        <div class="input-group-append">
-                            <button class="btn btn-outline-secondary" type="button" id="search">Search</button>
+                    <form class="form-inline">
+                        <div class="form-group mx-sm-3 mb-2">
+                            <input type="text" class="form-control" id="citiesInput" placeholder="Enter City">
                         </div>
-                    </div>
+                        <button type="submit" class="btn btn-primary mb-2" id="search">Search</button>
+                    </form>
                 </div>
 
                 <!--City List-->
@@ -53,7 +52,7 @@
 
             <div class="col-9">
                 <!--Daily Weather Forcast-->
-                <div class="card" >
+                <div class="card">
                     <!--City and Date-->
                     <h2 class="cityDate"></h2><img class="icon">
                     <br />
@@ -67,7 +66,7 @@
                     <p class="wind"></p>
                     <br />
                     <!--UV Index-->
-                    <p class="UV"></p>
+                    <h4><span class="badge badge-secondary UV"></span></h4>
                     <br />
                 </div>
 
@@ -88,6 +87,7 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment-with-locales.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <script src="script.js"></script>
+        
     </body>
 
 </html>
