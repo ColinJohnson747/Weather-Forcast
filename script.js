@@ -38,11 +38,6 @@ $(document).ready(function() {
 
   //function for running city search function on click of list
 
-  //Ajax Call
-  // var inputCity = document.getElementsByClassName('form-control').textContent;
-  // $("#search").click(function(){
-  //   console.log(inputCity)
-  // })
   var cityArrayLength = arrayFromStorage.length;
   var finalArrayPosition = cityArrayLength - 1;
   var lastCitySearched = arrayFromStorage[finalArrayPosition];
@@ -93,9 +88,8 @@ $(document).ready(function() {
           $(".UV").addClass("high");
         } else if (response2.value >= 8 && response2.value <= 10.99) {
           $(".UV").addClass("veryHigh");
-        }
-        else {
-          $(".UV").addClass("extreme")
+        } else {
+          $(".UV").addClass("extreme");
         }
         //Call for Five Day Forcast
         var queryURL5Day =
@@ -133,10 +127,10 @@ $(document).ready(function() {
     });
   }
 
-  
   function ajaxCallOnClick() {
     //All BUT UV
-    var clickedCity = $(this).text;
+    var clickedCity = $(this).textContent;
+    console.log("ajaxCallOnClick -> clickedCity", clickedCity);
 
     var queryURL =
       "https://api.openweathermap.org/data/2.5/weather?q=" +
@@ -181,9 +175,8 @@ $(document).ready(function() {
           $(".UV").addClass("high");
         } else if (response2.value >= 8 && response2.value <= 10.99) {
           $(".UV").addClass("veryHigh");
-        }
-        else {
-          $(".UV").addClass("extreme")
+        } else {
+          $(".UV").addClass("extreme");
         }
         //Call for Five Day Forcast
         var queryURL5Day =
@@ -220,8 +213,11 @@ $(document).ready(function() {
       });
     });
   }
+
+  let clickMeButton = $(".clickMe");
+
   $("#search").on("click", ajaxCallDTHMUV());
-  $("#click").on("click", ajaxCallOnClick());
+  clickMeButton.click(ajaxCallOnClick());
 
   window.onload = pullCities();
   window.onload = ajaxCallDTHMUV();
